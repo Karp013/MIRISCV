@@ -2,3 +2,8 @@ core_miriscv/*.bpad
 core_miriscv/*.simvision
 core_miriscv/out/
 core_miriscv/*.shm
+work/
+design.bin
+modelsim.ini
+riscv.ucdb
+tr_db.log
