@@ -67,11 +67,10 @@
               -l <out>/compile.log <cmp_opts>"
   sim:
     cmd: >
-      vsim -64 -c <cov_opts> <wave_opts> -do "run -a;" +designfile -f <out>/top.list <sim_opts> -voptargs=+acc -sv_seed <seed> +access +r+w +UVM_TESTNAME=<rtl_test> +UVM_VERBOSITY=UVM_LOW +bin=<binary> +ibex_tracer_file_base="<sim_dir>/trace_core" -l <sim_dir>/sim.log
+      vsim -64 -c <cov_opts> <wave_opts> -do "do wave.do; run -a;" +designfile -f <out>/top.list <sim_opts> -voptargs=+acc -sv_seed <seed> +access +r+w +UVM_TESTNAME=<rtl_test> +UVM_VERBOSITY=UVM_LOW +bin=<binary> +ibex_tracer_file_base="<sim_dir>/trace_core" -l <sim_dir>/sim.log
     cov_opts: >
       -do "coverage save -onexit <out>/cov.ucdb;"
     wave_opts: >
-      -wlf <sim_dir>/waves.wlf
       -do "log -r /*"
       -do "log -nofilter Memory -internal /miriscv_tb_top/dut/u_miriscv_core/*"
 

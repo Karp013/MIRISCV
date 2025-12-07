@@ -108,9 +108,19 @@ module miriscv_mdu
   // Multiplication //
   ////////////////////
 
-  assign mult_stall = 1'b0;
+  assign mult_start = mult_op && mdu_req_i;
 
-  assign mult_result_full = mul_operand_a * mul_operand_b;
+  miriscv_mul i_mul_unit
+  (
+    .clk_i            (clk_i           ),
+    .arstn_i          (arstn_i         ),
+    .mul_start_i      (mult_start      ),
+    .mul_operand_a_i  (mul_operand_a   ),
+    .mul_operand_b_i  (mul_operand_b   ),
+    .mul_result_o     (mult_result_full),
+    .mul_stall_req_o  (mult_stall       )
+  );
+
   assign mult_result = mult_result_full[2*XLEN-1:0];
 
 
